@@ -1,0 +1,24 @@
+{
+    "name": "notion-query",
+    "module": "index.ts",
+    "scripts": {
+        "commit": "cz-customizable",
+        "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+        "db:generate": "bunx prisma db push",
+        "db:push": "bunx prisma generate",
+        "dev": "bun --hot run ./index.ts"
+    },
+    "devDependencies": {
+        "cz-conventional-changelog": "^3.3.0",
+        "cz-customizable": "^7.2.1",
+        "prettier": "^3.3.3",
+        "@types/bun": "latest"
+    },
+    "peerDependencies": {
+        "typescript": "^5.0.0"
+    },
+    "dependencies": {
+        "@notionhq/client": "^2.2.15",
+        "dotenv": "^16.4.5"
+    }
+}
