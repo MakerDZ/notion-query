@@ -1,12 +1,18 @@
 {
     "name": "notion-query",
+    "version": "1.0.0",
     "module": "index.ts",
+    "description": "Just a small package for easily querying data from a Notion inline database.",
+    "main": "packages/index.ts",
+    "files": [
+        "packages"
+    ],
     "scripts": {
         "commit": "cz-customizable",
         "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-        "db:generate": "bunx prisma db push",
-        "db:push": "bunx prisma generate",
-        "dev": "bun --hot run ./index.ts"
+        "test": "bun --hot run ./example/example.ts",
+        "dev": "bun --hot run ./index.ts",
+        "build": "bun build packages/index.ts --outdir ./dist"
     },
     "devDependencies": {
         "cz-conventional-changelog": "^3.3.0",
@@ -19,6 +25,7 @@
     },
     "dependencies": {
         "@notionhq/client": "^2.2.15",
-        "dotenv": "^16.4.5"
+        "dotenv": "^16.4.5",
+        "notion-query": "^1.0.0"
     }
 }
