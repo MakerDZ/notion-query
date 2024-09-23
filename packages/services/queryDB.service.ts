@@ -158,7 +158,7 @@ export class NotionSchema {
             const relatedPageIds: string[] = [];
 
             const transformedResults = response.results.map((page: any) => {
-                const result: Record<string, any> = {};
+                const result: Record<string, any> = { pageId: page.id };
                 for (const [key, prop] of Object.entries(schema.properties)) {
                     const pageProperty = page.properties[key];
                     if (pageProperty) {

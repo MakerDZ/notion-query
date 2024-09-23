@@ -41,6 +41,7 @@ async function main() {
         const data = await notionSchema.queryDatabase(
             guidePostTable(databaseID)
         );
+
         console.log('Fetched data:', JSON.stringify(data, null, 2));
     } catch (error) {
         console.error('Error:', error);

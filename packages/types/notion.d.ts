@@ -36,13 +36,51 @@ interface RelationPropertySchema extends BasePropertySchema {
     fetchRelated?: boolean;
 }
 
-type PropertySchema = BasePropertySchema | UserPropertySchema;
+type PropertySchema =
+    | BasePropertySchema
+    | UserPropertySchema
+    | RelationPropertySchema;
 
 interface DatabaseSchema {
     id: string;
     properties: Record<string, PropertySchema>;
 }
 
+type InferPropertyType<T extends PropertySchema> = T extends {
+    type: 'title' | 'rich_text';
+}
+    ? string
+    : T extends { type: 'number' }
+      ? number
+      : T extends { type: 'select' }
+        ? string | null
+        : T extends { type: 'multi_select' }
+          ? string[]
+          : T extends { type: 'date' }
+            ? string | null
+            : T extends { type: 'checkbox' }
+              ? boolean
+              : T extends { type: 'relation' }
+                ? T extends { fetchRelated: true }
+                    ? Array<{ id: string; title: string | null }>
+                    : string[]
+                : T extends { type: 'created_by' | 'last_edited_by' }
+                  ? T extends { include: UserField[] }
+                      ? Pick<
+                            {
+                                id: string;
+                                name: string;
+                                avatar_url: string;
+                                email: string;
+                            },
+                            T['include'][number]
+                        >
+                      : string
+                  : any;
+
+type InferSchemaType<T extends DatabaseSchema> = {
+    [K in keyof T['properties']]: InferPropertyType<T['properties'][K]>;
+} & { pageId: string };
 
 interface inlineDB {
     databaseId: string;
