@@ -21,11 +21,11 @@
         "@types/bun": "latest"
     },
     "peerDependencies": {
-        "typescript": "^5.0.0"
+        "typescript": "^5.6.2"
     },
     "dependencies": {
         "@notionhq/client": "^2.2.15",
         "dotenv": "^16.4.5",
-        "notion-query": "^1.0.0"
+        "notion-query": "^1.0.2"
     }
 }
